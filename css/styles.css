@@ -1,0 +1,363 @@
+/* ============================================================
+   Para Cata — estilos
+   Paleta: beige cálido + vino tinto.
+   Cambia los colores desde las variables de :root.
+   ============================================================ */
+
+/* ---------- Fuentes (incluidas en assets/fonts, funcionan sin internet) ---------- */
+@font-face { font-family: "Cormorant Garamond"; font-weight: 300; font-style: normal; font-display: swap;
+  src: url("../assets/fonts/cormorant-garamond-latin-300-normal.woff2") format("woff2"); }
+@font-face { font-family: "Cormorant Garamond"; font-weight: 400; font-style: normal; font-display: swap;
+  src: url("../assets/fonts/cormorant-garamond-latin-400-normal.woff2") format("woff2"); }
+@font-face { font-family: "Cormorant Garamond"; font-weight: 500; font-style: normal; font-display: swap;
+  src: url("../assets/fonts/cormorant-garamond-latin-500-normal.woff2") format("woff2"); }
+@font-face { font-family: "Cormorant Garamond"; font-weight: 600; font-style: normal; font-display: swap;
+  src: url("../assets/fonts/cormorant-garamond-latin-600-normal.woff2") format("woff2"); }
+@font-face { font-family: "Cormorant Garamond"; font-weight: 400; font-style: italic; font-display: swap;
+  src: url("../assets/fonts/cormorant-garamond-latin-400-italic.woff2") format("woff2"); }
+@font-face { font-family: "Cormorant Garamond"; font-weight: 500; font-style: italic; font-display: swap;
+  src: url("../assets/fonts/cormorant-garamond-latin-500-italic.woff2") format("woff2"); }
+@font-face { font-family: "Jost"; font-weight: 300; font-style: normal; font-display: swap;
+  src: url("../assets/fonts/jost-latin-300-normal.woff2") format("woff2"); }
+@font-face { font-family: "Jost"; font-weight: 400; font-style: normal; font-display: swap;
+  src: url("../assets/fonts/jost-latin-400-normal.woff2") format("woff2"); }
+@font-face { font-family: "Jost"; font-weight: 500; font-style: normal; font-display: swap;
+  src: url("../assets/fonts/jost-latin-500-normal.woff2") format("woff2"); }
+@font-face { font-family: "Great Vibes"; font-weight: 400; font-style: normal; font-display: swap;
+  src: url("../assets/fonts/great-vibes-latin-400-normal.woff2") format("woff2"); }
+@font-face { font-family: "Parisienne"; font-weight: 400; font-style: normal; font-display: swap;
+  src: url("../assets/fonts/parisienne-latin-400-normal.woff2") format("woff2"); }
+
+/* ---------- Variables ---------- */
+:root {
+  --beige:       #f5ede0;
+  --beige-2:     #ebdfcc;
+  --cream:       #fffaf1;
+  --wine:        #6b1d2a;
+  --wine-dark:   #4a1119;
+  --wine-soft:   #8c3a47;
+  --gold:        #b08d57;
+  --ink:         #3b2a2a;
+  --ink-soft:    #6e5a57;
+
+  --serif:  "Cormorant Garamond", "Times New Roman", serif;
+  --sans:   "Jost", "Helvetica Neue", Arial, sans-serif;
+  --script: "Great Vibes", "Parisienne", cursive;
+  --letter: "Parisienne", "Great Vibes", cursive;
+}
+
+/* ---------- Base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  font-family: var(--serif);
+  color: var(--ink);
+  background-color: var(--beige);
+  /* textura de papel muy sutil */
+  background-image:
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .42  0 0 0 0 .22  0 0 0 0 .2  0 0 0 .055 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+img, video { max-width: 100%; display: block; }
+a { color: inherit; }
+
+/* ---------- Animación de aparición ----------
+   Los elementos .reveal aparecen al entrar en pantalla, tanto al bajar
+   como al subir (js/main.js agrega/quita la clase .in). */
+.js .reveal {
+  opacity: 0;
+  transform: translate3d(0, var(--ty, 46px), 0) rotate(var(--rot, 0deg)) scale(.975);
+  transition: opacity .8s ease, transform .95s cubic-bezier(.2, .7, .2, 1);
+  will-change: opacity, transform;
+}
+.js .reveal.from-top { --ty: -46px; }
+.js .reveal.in {
+  opacity: 1;
+  transform: translate3d(0, 0, 0) rotate(var(--rot, 0deg)) scale(1);
+  transition-delay: var(--delay, 0ms);
+}
+
+/* ---------- Portada ---------- */
+.hero {
+  min-height: 100vh;
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: 48px 24px;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(176, 141, 87, .16), transparent 60%),
+    radial-gradient(ellipse at 50% 100%, rgba(107, 29, 42, .12), transparent 55%);
+}
+.hero-inner { max-width: 760px; }
+.eyebrow {
+  font-family: var(--sans);
+  font-weight: 400;
+  font-size: .78rem;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: var(--wine);
+  margin: 0 0 20px;
+}
+.hero h1 {
+  font-family: var(--script);
+  font-weight: 400;
+  font-size: clamp(4.6rem, 18vw, 10.5rem);
+  line-height: 1.05;
+  margin: 0;
+  color: var(--wine);
+}
+.ornament { margin: 10px 0 22px; }
+.ornament svg { display: inline-block; max-width: 70%; height: auto; stroke: var(--gold); stroke-width: 1; fill: var(--gold); }
+.ornament svg line { fill: none; }
+.lead {
+  font-size: clamp(1.25rem, 3.6vw, 1.65rem);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--ink-soft);
+  max-width: 34ch;
+  margin: 0 auto;
+}
+.scroll-cue {
+  display: inline-block;
+  margin-top: 44px;
+  width: 26px; height: 44px;
+  border: 1.5px solid var(--wine);
+  border-radius: 14px;
+  position: relative;
+  opacity: .8;
+}
+.scroll-cue span {
+  position: absolute; left: 50%; top: 8px;
+  width: 4px; height: 8px; margin-left: -2px;
+  border-radius: 2px; background: var(--wine);
+  animation: cue 1.8s ease-in-out infinite;
+}
+@keyframes cue { 0% { transform: translateY(0); opacity: 1; } 70% { transform: translateY(14px); opacity: 0; } 100% { opacity: 0; } }
+
+/* ---------- Línea de tiempo ---------- */
+.timeline {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 40px 18px 40px;
+}
+.scene {
+  position: relative;
+  margin: 0 0 76px 8px;
+  padding: 0 0 0 26px;
+  border-left: 1px solid rgba(107, 29, 42, .28);
+}
+.scene::before {                       /* punto de la línea de tiempo */
+  content: "";
+  position: absolute;
+  left: -6px; top: 4px;
+  width: 11px; height: 11px;
+  border-radius: 50%;
+  background: var(--wine);
+  box-shadow: 0 0 0 5px var(--beige);
+}
+.date {
+  font-family: var(--sans);
+  font-weight: 500;
+  font-size: .78rem;
+  letter-spacing: .24em;
+  text-transform: uppercase;
+  color: var(--wine);
+  margin: 0 0 6px;
+}
+.scene h2 {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: clamp(2rem, 6vw, 3rem);
+  line-height: 1.12;
+  color: var(--wine-dark);
+  margin: 0 0 14px;
+}
+.scene > p:not(.date) {
+  font-size: clamp(1.22rem, 3.2vw, 1.42rem);
+  line-height: 1.62;
+  max-width: 60ch;
+  margin: 0 0 12px;
+}
+
+/* escena sin foto: tarjeta vino */
+.scene.note > p:not(.date) {
+  background: var(--wine);
+  color: var(--cream);
+  padding: 26px 28px;
+  border-radius: 4px;
+  box-shadow: 0 14px 34px rgba(74, 17, 25, .22);
+  font-style: italic;
+  font-size: clamp(1.25rem, 3.4vw, 1.5rem);
+}
+
+/* ---------- Fotos ---------- */
+.gallery { margin-top: 28px; column-gap: 22px; }
+.gallery.cols-1 { column-count: 1; max-width: 460px; }
+.gallery.cols-1.wide { max-width: 640px; }
+.gallery.cols-2 { column-count: 1; }
+.gallery.cols-3 { column-count: 2; column-gap: 14px; }
+@media (min-width: 640px) {
+  .scene { margin-left: 14px; padding-left: 44px; }
+  .gallery.cols-2 { column-count: 2; }
+  .gallery.cols-3 { column-count: 2; column-gap: 20px; }
+}
+@media (min-width: 940px) {
+  .scene { padding-left: 64px; }
+  .gallery.cols-3 { column-count: 3; }
+}
+
+.photo {
+  --rot: 0deg;
+  margin: 0 0 22px;
+  padding: 10px;
+  background: var(--cream);
+  border-radius: 3px;
+  box-shadow: 0 12px 30px rgba(74, 17, 25, .16), 0 2px 6px rgba(74, 17, 25, .08);
+  break-inside: avoid;
+  -webkit-column-break-inside: avoid;
+  cursor: zoom-in;
+}
+.photo:nth-child(odd)  { --rot: -.5deg; }
+.photo:nth-child(even) { --rot:  .5deg; }
+.gallery.cols-1 .photo { --rot: -.4deg; }
+.photo img { width: 100%; height: auto; background: var(--beige-2); }
+.photo figcaption {
+  font-style: italic;
+  font-size: 1.12rem;
+  line-height: 1.35;
+  color: var(--ink-soft);
+  padding: 12px 6px 4px;
+}
+.photo.video { cursor: default; max-width: 340px; }
+.photo.video video { width: 100%; height: auto; max-height: 70vh; background: #000; }
+.photo.feature { column-span: all; max-width: 520px; margin: 14px auto 0; }
+.photo.feature figcaption { font-size: 1.3rem; text-align: center; color: var(--wine); }
+
+/* ---------- Interludio: Golden Hour ---------- */
+.interlude {
+  padding: 120px 18px;
+  background: linear-gradient(180deg, var(--beige) 0%, #ecc9a0 32%, #cf8a67 58%, #94404e 82%, var(--wine-dark) 100%);
+}
+.song-card {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 44px 34px 40px;
+  text-align: center;
+  color: var(--cream);
+  background: rgba(74, 17, 25, .82);
+  border: 1px solid rgba(255, 250, 241, .18);
+  border-radius: 6px;
+  box-shadow: 0 24px 60px rgba(40, 8, 14, .35);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
+.song-card .eyebrow { color: #e9c9a0; }
+.song-card h2 {
+  font-family: var(--script);
+  font-weight: 400;
+  font-size: clamp(3.4rem, 12vw, 5.2rem);
+  line-height: 1.05;
+  margin: 0 0 18px;
+  color: #f6dcb8;
+}
+.song-card p { font-size: clamp(1.2rem, 3.2vw, 1.36rem); margin: 0 0 14px; }
+.song-links { margin-top: 26px !important; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.song-links a {
+  font-family: var(--sans);
+  font-size: .78rem;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--cream);
+  border: 1px solid rgba(255, 250, 241, .5);
+  padding: 11px 18px;
+  border-radius: 999px;
+  transition: background .25s, color .25s;
+}
+.song-links a:hover { background: var(--cream); color: var(--wine-dark); }
+
+/* ---------- Carta ---------- */
+.letter-section {
+  padding: 90px 18px 110px;
+  background: var(--wine-dark);
+}
+.letter {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 52px 34px 56px;
+  background:
+    linear-gradient(var(--cream), var(--cream));
+  border-radius: 4px;
+  box-shadow: 0 30px 70px rgba(0, 0, 0, .4);
+  position: relative;
+}
+.letter::before {                      /* marco fino interior */
+  content: "";
+  position: absolute; inset: 12px;
+  border: 1px solid rgba(176, 141, 87, .55);
+  border-radius: 2px;
+  pointer-events: none;
+}
+.letter-body { position: relative; }
+.letter-body p {
+  font-family: var(--letter);
+  font-size: clamp(1.6rem, 4.6vw, 2.05rem);
+  line-height: 1.62;
+  color: var(--wine-dark);
+  margin: 0 0 20px;
+}
+.letter-body .salutation {
+  font-family: var(--script);
+  font-size: clamp(2.8rem, 9vw, 4rem);
+  line-height: 1.1;
+  color: var(--wine);
+  margin-bottom: 18px;
+}
+.letter-body .signature {
+  font-family: var(--script);
+  font-size: clamp(2.8rem, 9vw, 4rem);
+  text-align: right;
+  color: var(--wine);
+  margin: 26px 8px 0 0;
+}
+
+/* ---------- Pie ---------- */
+.site-footer {
+  text-align: center;
+  padding: 22px 18px 34px;
+  background: var(--wine-dark);
+  color: rgba(255, 250, 241, .6);
+  font-family: var(--sans);
+  font-size: .72rem;
+  letter-spacing: .24em;
+  text-transform: uppercase;
+}
+.site-footer p { margin: 0; }
+
+/* ---------- Foto ampliada ---------- */
+.lightbox {
+  position: fixed; inset: 0; z-index: 100;
+  display: grid; grid-template-columns: 56px 1fr 56px; align-items: center;
+  background: rgba(30, 8, 12, .92);
+  padding: 20px 6px;
+}
+.lightbox[hidden] { display: none; }
+.lightbox figure { margin: 0; text-align: center; max-height: 100%; }
+.lightbox img { max-height: 80vh; max-height: 80dvh; width: auto; margin: 0 auto; border-radius: 3px; box-shadow: 0 20px 60px rgba(0,0,0,.5); }
+.lightbox figcaption { color: var(--cream); font-style: italic; font-size: 1.15rem; padding: 14px 10px 0; max-width: 60ch; margin: 0 auto; }
+.lightbox button {
+  background: none; border: 0; color: var(--cream);
+  font-size: 2.6rem; line-height: 1; cursor: pointer; padding: 10px; opacity: .85;
+}
+.lightbox button:hover { opacity: 1; }
+.lb-close { position: absolute; top: 8px; right: 14px; font-size: 3rem !important; }
+
+/* ---------- Accesibilidad / sin animaciones ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .js .reveal { transform: none !important; transition: opacity .4s ease; }
+  .scroll-cue span { animation: none; }
+}
